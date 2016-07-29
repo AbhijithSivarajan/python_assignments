@@ -165,4 +165,4 @@ if __name__ == "__main__":
         logger.info("Output String: {}\n".format(result_string))
 
     except docopt.DocoptExit as e:
-        logger.error(e.message)
+        logger.exception(e.message)
