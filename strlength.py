@@ -101,20 +101,20 @@ if __name__ == '__main__':
 
         # To take string & list.
         string = ' '.join(arguments['TEXT'])
-        input_list = str(arguments['--list'])
-        input_list = filter(None, re.split("[\[\], ;']+", input_list))
+        input_string = str(arguments['--list'])
+        input_list = filter(None, re.split("[\[\], ;']+", input_string))
 
-        objLength = Length()
+        length_obj = Length()
 
         if is_valid_choice(choice):
 
             if choice == CHOICE_FOR_WITH_BUILT_IN:
-                list_length = objLength.built_in(input_list)
-                string_length = objLength.built_in(string)
+                list_length = length_obj.built_in(input_list)
+                string_length = length_obj.built_in(string)
 
             elif choice == CHOICE_FOR_WITHOUT_BUILT_IN:
-                list_length = objLength.without_built_in(input_list)
-                string_length = objLength.without_built_in(string)
+                list_length = length_obj.without_built_in(input_list)
+                string_length = length_obj.without_built_in(string)
 
         else:
             logger.error('Invalid choice provided...\n')

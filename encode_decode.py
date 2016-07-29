@@ -150,14 +150,14 @@ if __name__ == "__main__":
         string_input = ' '.join(arguments['TEXT'])
 
         # Create object of class Coder
-        c = Coder(string_input, number_of_shifts)
+        coder = Coder(string_input, number_of_shifts)
 
         # Call respective method based on choice
         if is_valid_choice(choice):
             if choice == Choice().ENCODE:
-                result_string = c.encode()
+                result_string = coder.encode()
             elif choice == Choice().DECODE:
-                result_string = c.decode()
+                result_string = coder.decode()
         else:
             logger.error('Invalid choice provided...\n')
             sys.exit(0)

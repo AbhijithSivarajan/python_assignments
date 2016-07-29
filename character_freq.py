@@ -57,8 +57,8 @@ if __name__ == '__main__':
 
         string = ' '.join(arguments['TEXT'])
 
-        CharFreq_obj = CharFreq()
-        result_dict = CharFreq_obj.char_freq(string)
+        char_freq_obj = CharFreq()
+        result_dict = char_freq_obj.char_freq(string)
         logger.info('Character Frequency:\n{}'.format(result_dict))
 
     except docopt.DocoptExit as e:

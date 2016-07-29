@@ -106,11 +106,12 @@ if __name__ == '__main__':
             sys.exit(0)
 
         #  Access elements of list.
-        input_list = str(arguments['TEXT'])
-        ilist = filter(None, re.split("[\[\], ;']+", input_list))
+        input_string = str(arguments['TEXT'])
+        input_list = filter(None, re.split("[\[\], ;']+", input_string))
 
-        Filter_obj = Filter()
-        result_list = Filter_obj.filter_long_words(choice, ilist, max_length)
+        filter_obj = Filter()
+        result_list = filter_obj.filter_long_words(choice, input_list, \
+                                                   max_length)
 
         if isinstance(result_list, list):
             logger.info("\n  Filtered List :- {}\n".format(result_list))

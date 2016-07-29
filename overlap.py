@@ -57,13 +57,13 @@ if __name__ == '__main__':
     try:
         arguments = docopt.docopt(__doc__)
 
-        input1 = str(arguments['--list1'])
+        first_input_string = str(arguments['--list1'])
         # Splitting the contents by seperator into list
-        input_list1 = filter(None, re.split("[\[\], ;']+", input1))
+        input_list1 = filter(None, re.split("[\[\], ;']+", first_input_string))
 
-        input2 = str(arguments['--list2'])
+        second_input_string = str(arguments['--list2'])
         # Splitting the contents by seperator into list
-        input_list2 = filter(None, re.split("[\[\], ;']+", input2))
+        input_list2 = filter(None, re.split("[\[\], ;']+", second_input_string))
 
         result = overlapping(input_list1, input_list2)
         logger.info("Overlapping Exists: {}\n".format(result))
