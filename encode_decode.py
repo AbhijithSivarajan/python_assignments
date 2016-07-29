@@ -7,7 +7,7 @@ Arguments:
 Options:
         -h, --help          Show this message.
 
-        --choice=N           Choice to Encode or Decode the string [1 | 2]
+        --choice=N          Choice to Encode or Decode the string [1 | 2]
 
         number_of_shifts    The number of shifts by which the string
                             is to be encoded or decoded.
@@ -29,7 +29,6 @@ FIRST_SMALL_LETTER_UNICODE = 97
 FIRST_CAPITAL_LETTER_UNICODE = 65
 FIRST_SMALL_LETTER_LATIN = 'a'
 FIRST_CAPITAL_LETTER_LATIN = 'A'
-VALID_CHOICES = [Choice().ENCODE, Choice().DECODE]
 
 
 # Setting up logger
@@ -62,8 +61,12 @@ class Coder(object):
         """
         Initialising the instance variables.
         """
-        self.string_input = string_input
-        self.number_of_shifts = int(number_of_shifts)
+        try:
+            self.string_input = string_input
+            self.number_of_shifts = int(number_of_shifts)
+        except Exception:
+            logger.error('Wrong input...Not a valid Integer Number...\n')
+            raise Exception('Input not in Expected Format.')
 
     def decode(self):
         """
@@ -74,15 +77,21 @@ class Coder(object):
             if ord(character) >= FIRST_SMALL_LETTER_UNICODE:
                 # Characters are shifted by number_of_shifts to the right.
                 # By adding the number_of_shifts to the unicode values.
-                result_string += chr((((ord(character) - ord(FIRST_SMALL_LETTER_LATIN)) +
-                          self.number_of_shifts) % TOTAL_ALPHABETS_COUNT) +
-                         ord(FIRST_SMALL_LETTER_LATIN))
+                result_string += chr((((ord(character) -
+                                        ord(FIRST_SMALL_LETTER_LATIN)) +
+                                       self.number_of_shifts) %
+                                      TOTAL_ALPHABETS_COUNT) +
+                                     ord(FIRST_SMALL_LETTER_LATIN))
+
             elif ord(character) >= FIRST_CAPITAL_LETTER_UNICODE:
-                result_string += chr((((ord(character) - ord(FIRST_CAPITAL_LETTER_LATIN)) +
-                          self.number_of_shifts) % TOTAL_ALPHABETS_COUNT) +
-                         ord(FIRST_CAPITAL_LETTER_LATIN))
+                result_string += chr((((ord(character) -
+                                        ord(FIRST_CAPITAL_LETTER_LATIN)) +
+                                       self.number_of_shifts) %
+                                      TOTAL_ALPHABETS_COUNT) +
+                                     ord(FIRST_CAPITAL_LETTER_LATIN))
             else:
                 result_string += character
+
         return result_string
 
     def encode(self):
@@ -94,15 +103,21 @@ class Coder(object):
             if ord(character) >= FIRST_SMALL_LETTER_UNICODE:
                 # Characters are shifted by number_of_shifts to the left.
                 # By subtracting the number_of_shifts from the unicode values.
-                result_string += chr((((ord(character) - ord(FIRST_SMALL_LETTER_LATIN)) -
-                          self.number_of_shifts) % TOTAL_ALPHABETS_COUNT) +
-                         ord(FIRST_SMALL_LETTER_LATIN))
+                result_string += chr((((ord(character) -
+                                        ord(FIRST_SMALL_LETTER_LATIN)) -
+                                       self.number_of_shifts) %
+                                      TOTAL_ALPHABETS_COUNT) +
+                                     ord(FIRST_SMALL_LETTER_LATIN))
+
             elif ord(character) >= FIRST_CAPITAL_LETTER_UNICODE:
-                result_string += chr((((ord(character) - ord(FIRST_CAPITAL_LETTER_LATIN)) -
-                          self.number_of_shifts) % TOTAL_ALPHABETS_COUNT) +
-                         ord(FIRST_CAPITAL_LETTER_LATIN))
+                result_string += chr((((ord(character) -
+                                        ord(FIRST_CAPITAL_LETTER_LATIN)) -
+                                       self.number_of_shifts) %
+                                      TOTAL_ALPHABETS_COUNT) +
+                                     ord(FIRST_CAPITAL_LETTER_LATIN))
             else:
                 result_string += character
+
         return result_string
 
 
@@ -110,17 +125,17 @@ def is_valid_choice(choice):
     """
     Check if choice provided is valid or not.
     """
-    return (choice in VALID_CHOICES)
+    return (choice in [Choice().ENCODE, Choice().DECODE])
 
 
 if __name__ == "__main__":
 
+    logger.info('Started Program Execution...')
+    logger.addHandler(ch)
+
     try:
         arguments = docopt.docopt(__doc__)
         number_of_shifts = 0
-
-        logger.info('Started Program Execution...')
-        logger.addHandler(ch)
 
         # Access the choice and number_of_shifts.
         try:
