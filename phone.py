@@ -42,7 +42,7 @@ class Phone(object):
 
     def parse_phone_number(self, phone_no):
         """
-        Validate and parse the phone number.
+        Method to validate and parse the phone number.
         """
         pattern = r'^((emergency )?1\-)?\(?(?P<area_code>\d{3})\)?[\s.-]'\
                   r'(?P<trunk>\d{3})[\s.-](?P<phone_number>\d{4})[\s]?'\
@@ -71,7 +71,6 @@ if __name__ == '__main__':
         phone_no = ' '.join(arguments['PHONE_NO'])
 
         phone_obj = Phone()
-
         try:
             result_dict = phone_obj.parse_phone_number(phone_no)
             logger.info('{}\n'.format(result_dict))

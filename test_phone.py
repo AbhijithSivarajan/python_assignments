@@ -1,5 +1,5 @@
-from phone import Phone
 import pytest
+from phone import Phone
 
 
 """
