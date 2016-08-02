@@ -7,11 +7,6 @@ Code for unit testing url.py
 """
 
 
-"""
-For testing is_valid_url() method
-"""
-
-
 def test_url_with_valid_url_with_http():
     """
     Positive Testing
@@ -71,7 +66,7 @@ def test_url_with_invalid_protocol():
     Negative Testing
     Providing invalid protocol.
     """
-    url = 'htps://empower.emtecinc.com:8008/v13.4/api/robos'
+    url = 'htps://empower.emtecinc.com:8008/v1.4/api/robos'
     assert is_valid_url(url) is False
 
 
@@ -80,16 +75,16 @@ def test_url_with_invalid_host_name():
     Negative Testing
     Providing invalid host name.
     """
-    url = 'https://empower.google.com:8008/v13.4/api/robos'
+    url = 'https://empower.google.com:8008/v1.4/api/robos'
     assert is_valid_url(url) is False
 
 
 def test_url_with_invalid_port_number():
     """
     Negative Testing
-    Providing invalid port number(length != 4).
+    Providing invalid port number(len(port_number) != 4).
     """
-    url = 'htps://empower.emtecinc.com:80080230/v13.4/api/robos'
+    url = 'https://empower.emtecinc.com:80080230/v3.4/api/robos'
     assert is_valid_url(url) is False
 
 
@@ -98,5 +93,5 @@ def test_url_with_invalid_symbols_in_the_end():
     Negative Testing
     Providing invalid symbols in the end.
     """
-    url = 'htps://empower.emtecinc.com:8008/v13.4/api/robos/trial#'
+    url = 'https://empower.emtecinc.com:8008/v1.4/api/robos/trial#'
     assert is_valid_url(url) is False

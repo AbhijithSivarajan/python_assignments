@@ -14,10 +14,10 @@ Options:
 """
 
 
-import sys
-import logging
 import docopt
+import logging
 import re
+import sys
 
 
 """
@@ -60,7 +60,6 @@ class Length(object):
         try:
             return len(input)
         except TypeError:
-            logger.error('Wrong input...Not a valid Integer Number...\n')
             raise Exception('Input not in Expected Format.')
 
     def without_built_in(self, input):
@@ -69,7 +68,7 @@ class Length(object):
         """
         input_length = 0
         try:
-            for x in input:
+            for character in input:
                 input_length = input_length + 1
             return input_length
         except TypeError:
