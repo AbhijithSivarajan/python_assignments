@@ -14,9 +14,9 @@ Options:
 """
 
 
-import sys
-import logging
 import docopt
+import logging
+import sys
 
 
 """

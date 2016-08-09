@@ -9,15 +9,18 @@ Options:
 """
 
 
-import re
 import docopt
 import logging
+import re
 
 
 """
 To compare between two lists and return True even if
 one element is same in both the lists.
 """
+
+
+arguments = []
 
 
 # Setting up logger
@@ -40,13 +43,16 @@ def overlapping(list1, list2):
     """
     try:
         for word_list1 in list1:
-            for word_list2 in list2:
-                if word_list1 == word_list2:
-                    return True
+            if word_list1 in list2:
+                return True
         return False
     except TypeError:
-        logger.error('Wrong input...\n')
         raise Exception('Input not in Expected Format.')
+
+
+def access_input(key):
+    input_string = str(arguments[key])
+    return filter(None, re.split("[\[\], ;']+", input_string))
 
 
 if __name__ == '__main__':
@@ -57,13 +63,8 @@ if __name__ == '__main__':
     try:
         arguments = docopt.docopt(__doc__)
 
-        first_input_string = str(arguments['--list1'])
-        # Splitting the contents by seperator into list
-        input_list1 = filter(None, re.split("[\[\], ;']+", first_input_string))
-
-        second_input_string = str(arguments['--list2'])
-        # Splitting the contents by seperator into list
-        input_list2 = filter(None, re.split("[\[\], ;']+", second_input_string))
+        input_list1 = access_input('--list1')
+        input_list2 = access_input('--list2')
 
         result = overlapping(input_list1, input_list2)
         logger.info("Overlapping Exists: {}\n".format(result))

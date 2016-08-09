@@ -1,5 +1,5 @@
-from overlap import overlapping
 import pytest
+from overlap import overlapping, access_input
 
 
 """
@@ -9,8 +9,8 @@ Code for unit testing overlapping.py
 
 def test_overlapping_with_valid_inputs():
     """
-    For testing overlapping() method.
     Positive Testing
+    Valid inputs are provided
     """
 
     list1 = ['asd', 'as', 'aef']
@@ -20,8 +20,8 @@ def test_overlapping_with_valid_inputs():
 
 def test_overlapping_with_invalid_inputs_not_list():
     """
-    For testing overlapping() method.
     Negative Testing
+    List inputs are not provided
     """
 
     list1 = ['asd', 'as', 'aef']

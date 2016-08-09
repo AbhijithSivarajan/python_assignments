@@ -1,5 +1,5 @@
-from encode_decode import Coder, is_valid_choice
 import pytest
+from encode_decode import Coder, is_valid_choice
 
 
 """
@@ -9,32 +9,25 @@ Code for unit testing encode_decode.py
 
 def test_encode_with_valid_inputs():
     """
-    For testing encode() method.
     Positive Testing
+    Providing valid inputs
     """
     assert Coder('defg', 3).encode() == 'abcd'
 
 
 def test_encode_with_invalid_number_of_shifts():
     """
-    For testing encode() method.
     Negative Testing
-    Providing invalid number_of_switch
+    Providing invalid input for number_of_shifts.
     """
     with pytest.raises(Exception):
         assert Coder('defg', '$').encode()
 
 
-"""
-For testing decode() method
-"""
-
-
 def test_decode_with_invalid_number_of_shifts():
     """
-    For testing decode() method.
     Negative Testing
-    Providing invalid number_of_switch
+    Providing invalid type for number_of_shifts.
     """
     y = "Gb or be abg gb or, Gung vf gur dhrfgvba."
     with pytest.raises(Exception):
@@ -43,36 +36,31 @@ def test_decode_with_invalid_number_of_shifts():
 
 def test_decode_with_valid_inputs():
     """
-    For testing decode() method.
     Positive Testing
+    Providing valid inputs
     """
     assert Coder("Nkrru!!!", 46).decode() == "Hello!!!"
 
 
-"""
-For testing is_valid_choice() method
-"""
-
-
 def test_choice_with_valid_inputs():
     """
-    For testing is_valid_choice() method.
     Positive Testing
+    Providing valid choice
     """
     assert is_valid_choice(1) is True
 
 
 def test_choice_with_invalid_choice():
     """
-    For testing is_valid_choice() method.
     Negative Testing
+    Providing invalid choice
     """
     assert is_valid_choice(3) is False
 
 
 def test_choice_with_invalid_inputs_string():
     """
-    For testing is_valid_choice() method.
     Negative Testing
+    Providing invalid type for choice.
     """
     assert is_valid_choice('one') is False

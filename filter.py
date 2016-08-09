@@ -12,10 +12,11 @@ Options:
         --max=N         Maximum length of acceptable string
 """
 
-import logging
+
 import docopt
-import sys
+import logging
 import re
+import sys
 
 """
 To filter words from a list with string-length greater than max_length.
@@ -53,26 +54,24 @@ class Filter(object):
         Method to filter the list with words greater than specified length.
         """
         try:
-            if is_valid_choice(int(choice)):
+            if is_valid_choice(choice):
 
                     if choice == CHOICE_FOR_WITH_BUILT_IN:
                         for x in input_list:
-                            if len(x) > int(max_length):
+                            if len(x) > max_length:
                                 self.reslist.append(x)
                     elif choice == CHOICE_FOR_WITHOUT_BUILT_IN:
                         for x in input_list:
                             cnt = 0
                             for y in x:
                                 cnt = cnt + 1
-                            if cnt > int(max_length):
+                            if cnt > max_length:
                                 self.reslist.append(x)
+                    return self.reslist
             else:
-                return 'Invalid choice provided'
-
-            return self.reslist
+                raise Exception('Invalid choice provided')
 
         except Exception:
-            logger.error('Wrong input...Not a valid Integer Number...\n')
             raise Exception('Input not in Expected Format.')
 
 
@@ -92,17 +91,12 @@ if __name__ == '__main__':
         arguments = docopt.docopt(__doc__)
 
         # Take choice to use Built-In Functions or not.
+        # Take max. length for filtering.
         try:
             choice = int(arguments['--choice'])
-        except ValueError:
-            logger.error("Choice not a valid number.\n")
-            sys.exit(0)
-
-        # Take Maximum Length.
-        try:
             max_length = int(arguments['--max'])
         except ValueError:
-            logger.error("Max. Length not a valid number.\n")
+            logger.error("Wrong input...Not a valid integer number.\n")
             sys.exit(0)
 
         #  Access elements of list.
@@ -110,14 +104,12 @@ if __name__ == '__main__':
         input_list = filter(None, re.split("[\[\], ;']+", input_string))
 
         filter_obj = Filter()
-        result_list = filter_obj.filter_long_words(choice, input_list, \
+        try:
+            result_list = filter_obj.filter_long_words(choice, input_list, \
                                                    max_length)
-
-        if isinstance(result_list, list):
             logger.info("\n  Filtered List :- {}\n".format(result_list))
-        else:
+        except Exception:
             logger.error('Invalid choice provided...\n')
-            sys.exit(0)
 
     except docopt.DocoptExit as e:
         logger.error(e.message)
